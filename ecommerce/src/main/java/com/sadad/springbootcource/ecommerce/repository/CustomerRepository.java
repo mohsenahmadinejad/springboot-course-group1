@@ -4,13 +4,13 @@ import com.sadad.springbootcource.ecommerce.entity.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.history.RevisionRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-public interface CustomerRepository extends JpaRepository<Customer,Long> {
-
+public interface CustomerRepository extends JpaRepository<Customer, Long>, RevisionRepository<Customer, Long, Integer> {
     public List<Customer> findByFirstName(String firstName);
     public List<Customer> findByFirstNameContaining(String s);
     public List<Customer> findByFirstNameAndLastName(String firstName,String LastName);

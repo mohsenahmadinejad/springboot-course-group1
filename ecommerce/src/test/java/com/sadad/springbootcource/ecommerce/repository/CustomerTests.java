@@ -1,14 +1,17 @@
-package com.sadad.springbootcource.ecommerce;
+package com.sadad.springbootcource.ecommerce.repository;
 
 
 import com.sadad.springbootcource.ecommerce.entity.Customer;
+import com.sadad.springbootcource.ecommerce.entity.Order;
 import com.sadad.springbootcource.ecommerce.repository.CustomerRepository;
 import com.sadad.springbootcource.ecommerce.rest.CustomerResource;
 import com.sadad.springbootcource.ecommerce.service.CustomerService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,9 +41,9 @@ public class CustomerTests {
     void saveAllCustomer() {
 
         List<Customer> customers=new ArrayList<>();
-        customers.add(new Customer(21L,"Ali","Ahmadi","ali21@gmail.com"));
-        customers.add(new Customer(22L,"Ali2","Ahmadi2","ali22@gmail.com"));
-        customers.add(new Customer(23L,"Ali3","Ahmadi3","ali23@gmail.com"));
+        customers.add(new Customer(21L,"Ali","Ahmadi","ali21@gmail.com",null));
+        customers.add(new Customer(22L,"Ali2","Ahmadi2","ali22@gmail.com",null));
+        customers.add(new Customer(23L,"Ali3","Ahmadi3","ali23@gmail.com",null));
         customerRepository.saveAll(customers);
 
 
@@ -51,7 +54,7 @@ public class CustomerTests {
 
     @Test
     void updateCustomer() {
-        Customer customer=new Customer(2L,"Ali","mohamadi222","ali@gmail.com");
+        Customer customer=new Customer(2L,"Ali","mohamadi222","ali@gmail.com",null);
         customerRepository.save(customer);
     }
 
@@ -119,7 +122,80 @@ public class CustomerTests {
     }
 
 
+    @Test
+    void saveCustomerWithOrders() {
+//        Customer customer=new Customer(null,"mohsen","ahmadi","mohsen@gmai.com");
+        Customer customer=Customer.builder()
+                .firstName("ali50")
+                .lastName("ahmadi50")
+                .email("ali@gmail5110")
+                .build();
+
+        Order order1= Order.builder()
+                .orderDate(LocalDateTime.now())
+                .totalAmount(10D)
+                .build();
+        Order order2= Order.builder()
+                .orderDate(LocalDateTime.now())
+                .totalAmount(11D)
+                .build();
+        Order order3= Order.builder()
+                .orderDate(LocalDateTime.now())
+                .totalAmount(12D)
+                .build();
+
+        customer.setOrders(new ArrayList<Order>());
+        customer.getOrders().add(order1);
+        customer.getOrders().add(order2);
+        customer.getOrders().add(order3);
 
 
+        customerRepository.save(customer);
+
+    }
+
+    @Test
+    @Transactional
+    void getCustomerById() {
+        Customer customer=customerRepository.findById(59L).get();
+        System.out.println(customer.getOrders());
+
+    }
+
+
+    @Test
+    void saveCustomerWithOrders2() {
+//        Customer customer=new Customer(null,"mohsen","ahmadi","mohsen@gmai.com");
+        Customer customer=Customer.builder()
+                .firstName("mohsen50")
+                .lastName("mohsen50ahmadi50")
+                .email("mohsen501@gmail5110")
+                .build();
+
+        Order order1= Order.builder()
+                .orderDate(LocalDateTime.now())
+                .totalAmount(100D)
+                .customer(customer)
+                .build();
+        Order order2= Order.builder()
+                .orderDate(LocalDateTime.now())
+                .totalAmount(110D)
+                .customer(customer)
+                .build();
+        Order order3= Order.builder()
+                .orderDate(LocalDateTime.now())
+                .totalAmount(120D)
+                .customer(customer)
+                .build();
+
+        customer.setOrders(new ArrayList<Order>());
+        customer.getOrders().add(order1);
+        customer.getOrders().add(order2);
+        customer.getOrders().add(order3);
+
+
+        customerRepository.save(customer);
+
+    }
 
 }
