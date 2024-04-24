@@ -1,6 +1,6 @@
 package com.sadatspringbootcourse.socialmedia.repository;
 
-import com.sadatspringbootcourse.socialmedia.User;
+import com.sadatspringbootcourse.socialmedia.entity.User;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

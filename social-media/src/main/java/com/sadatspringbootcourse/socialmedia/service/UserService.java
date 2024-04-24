@@ -1,13 +1,10 @@
 package com.sadatspringbootcourse.socialmedia.service;
 
-import com.sadatspringbootcourse.socialmedia.User;
+import com.sadatspringbootcourse.socialmedia.entity.User;
 import com.sadatspringbootcourse.socialmedia.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package com.sadatspringbootcourse.socialmedia.repository;
 
-import com.sadatspringbootcourse.socialmedia.User;
+import com.sadatspringbootcourse.socialmedia.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;

@@ -1,6 +1,7 @@
 package com.sadad.springbootcource.ecommerce.repository;
 
 import com.sadad.springbootcource.ecommerce.entity.Customer;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -40,6 +41,12 @@ public interface CustomerRepository extends JpaRepository<Customer, Long>, Revis
     @Query(value = "update tbl_customer c  set c.first_name= ?1 where c.email_address=?2",
             nativeQuery = true)
     public int updateCustomerNameByEmailNative(String firstName, String email);
+
+
+    public List<Customer> findByLastName(String lastName, Pageable page);
+
+    @Query("select c from Customer c where c.lastName=?1")
+    public List<Customer> getCustomerByLastNameQueryPagination(String lastName,Pageable pageable);
 
 
 
